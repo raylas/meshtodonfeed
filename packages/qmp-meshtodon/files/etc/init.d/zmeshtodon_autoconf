@@ -1,0 +1,49 @@
+#!/bin/sh /etc/rc.common
+
+START=99
+STOP=99
+QMP_CONTROL_FILE="/qmp_configured"
+MESHTODON_CONTROL_FILE="/meshtodon_configured"
+
+boot() {
+        echo boot
+        if [ -e "$QMP_CONTROL_FILE" ]; then
+                echo "qMp configured, running Meshtodon conf"
+                configure
+        else
+                echo "qMp is not configured yet"
+        fi
+}
+
+configure() {
+        echo "entering configure"
+        if [ ! -e "$MESHTODON_CONTROL_FILE" ]; then
+        echo "Configuring Meshtodon"
+        initial_conf
+        else
+                echo "Meshtodon is already configured"
+		start_up
+        fi
+}
+
+initial_conf() {
+        echo "running initial conf"
+        /etc/meshtodon/meshtodon_initial_conf.sh
+        touch $MESHTODON_CONTROL_FILE
+# runs via meshtodon_conf.sh
+#	qmpcontrol configure_wifi
+	reboot
+}
+start_up() {
+	echo Startup
+	/etc/meshtodon/meshtodon_startup.sh
+}
+
+start() {
+        echo start
+
+}
+
+stop() {
+        echo stop
+}
