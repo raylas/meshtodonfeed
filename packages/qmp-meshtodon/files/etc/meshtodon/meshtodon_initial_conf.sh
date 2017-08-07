@@ -4,7 +4,7 @@
 
 #hack to change default password
 cat <<"EOL" > /etc/shadow
-root:$6$.Uz.rqvWj47gnFp5$Fzk.k/g5RdRfp1B0lgkgVtOfnQTJGny.2LpmXMW6J/UDiMZxC7PaSV9puPeLLgCIAqyMTtMtvz8Uze2DFhO5z1:17382:0:99999:7:::
+root:$1$SCqxKOZ9$NX1sMkFze4bUDXu93sQQH.:17382:0:99999:7:::
 daemon:*:0:0:99999:7:::
 ftp:*:0:0:99999:7:::
 network:*:0:0:99999:7:::
