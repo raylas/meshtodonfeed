@@ -29,7 +29,7 @@ mac=$(ip link show eth0 | awk '/ether/ {print $2}' | sed s/://g)
 node=${mac:8}
 devname="meshtodon"
 hostname="$devname-$node"
-ssid="meshtodon $node"
+ssid="meshtodon-$node"
 
 touch /etc/config/meshtodon
 echo "config meshtodon 'main'" > /etc/config/meshtodon
@@ -67,11 +67,11 @@ uci set network.lan.netmask='255.255.255.0'
 
 #nodog settings
 uci set nodogsplash.@instance[0].enabled='1'
-uci set nodogsplash.@instance[0].gatewayname='Meshtodon Splash'
+uci set nodogsplash.@instance[0].gatewayname='Meshtodon'
 uci del_list nodogsplash.@instance[0].authenticated_users='block to 10.0.0.0/8'
 uci add_list nodogsplash.@instance[0].authenticated_users='block to 172.16.0.0/12'
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all to 10.0.0.0/8'
-uci set nodogsplash.@instance[0].redirecturl='http://sbmesh.net/'
+uci set nodogsplash.@instance[0].redirecturl='http://sb.mesh/'
 #one hour
 uci set nodogsplash.@instance[0].clientidletimeout='60'
 #one day
@@ -98,6 +98,12 @@ uci set network.@switch_vlan[-1].ports='0t 1'
 uci set network.@switch_vlan[-1].vid='2'
 fi
 
+#dropbear
+uci set dropbear.@dropbear[0].RootPasswordAuth='off'
+uci set dropbear.@dropbear[0].Port='2646'
+uci set dropbear.@dropbear[0].PasswordAuth='off'
+uci commit
+
 /etc/init.d/network restart
 
 echo "qmp mesh" > /etc/mdns/domain4
@@ -107,9 +113,9 @@ echo "qm6 mesh6" > /etc/mdns/domain6
 uci del_list libremap.settings.api_url='http://libremap.berlin.freifunk.net/api'
 uci del_list libremap.settings.api_url='http://libremap.net/api/'
 uci add_list libremap.settings.api_url='http://map.mesh/api'
-uci set libremap.settings.community='Meshtodon Mesh'
-uci set libremap.location.latitude='40.52'
-uci set libremap.location.longitude='-74'
+uci set libremap.settings.community='Santa Barbara Mesh'
+uci set libremap.location.latitude='34.419275'
+uci set libremap.location.longitude='-119.699334'
 uci commit
 /etc/init.d/libremap-agent enable
 
