@@ -100,7 +100,7 @@ fi
 
 #dropbear
 uci set dropbear.@dropbear[0].RootPasswordAuth='off'
-uci set dropbear.@dropbear[0].Port='2646'
+uci set dropbear.@dropbear[0].Port='22'
 uci set dropbear.@dropbear[0].PasswordAuth='off'
 uci commit
 
@@ -137,8 +137,8 @@ echo "#allow only SSH (rate limit) and (tinc) on WAN" >> /etc/firewall.user
 echo 'wan=$(uci get qmp.interfaces.wan_devices)' >> /etc/firewall.user
 echo 'iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT' >> /etc/firewall.user
 echo 'iptables -A INPUT -p tcp --dport 22 -j ACCEPT -i $wan' >> /etc/firewall.user
-echo 'iptables -A INPUT -p tcp --dport 655 -j ACCEPT -i $wan' >> /etc/firewall.user
-echo 'iptables -A INPUT -p udp --dport 655 -j ACCEPT -i $wan' >> /etc/firewall.user
+echo '#iptables -A INPUT -p tcp --dport 655 -j ACCEPT -i $wan' >> /etc/firewall.user
+echo '#iptables -A INPUT -p udp --dport 655 -j ACCEPT -i $wan' >> /etc/firewall.user
 echo 'iptables -I INPUT -p tcp --dport 22 -i $wan -m state --state NEW -m recent --set' >> /etc/firewall.user
 echo 'iptables -I INPUT -p tcp --dport 22 -i $wan -m state --state NEW -m recent  --update --seconds 60 --hitcount 4 -j DROP' >> /etc/firewall.user
 echo 'iptables -A INPUT -j DROP -i $wan' >> /etc/firewall.user

@@ -38,7 +38,7 @@ fi
 
 if [ "$1" = "set" ] && [ "$2" = "ssid" ] && [ -n "$3" ]; then
   ssid="$3"
-  echo "Setting ssid: meshtodon $ssid"
-  uci set wireless.wlan0ap.ssid="meshtodon $ssid"
+  echo "Setting ssid: $ssid"
+  uci set wireless.wlan0ap.ssid="$ssid"
   /etc/init.d/network reload
 fi
