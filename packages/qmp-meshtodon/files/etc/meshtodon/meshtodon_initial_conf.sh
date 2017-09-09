@@ -27,9 +27,9 @@ ip="10.$x.$y.1"
 
 mac=$(ip link show eth0 | awk '/ether/ {print $2}' | sed s/://g)
 node=${mac:8}
-devname="meshtodon"
+devname="sbmesh"
 hostname="$devname-$node"
-ssid="meshtodon-$node"
+ssid="sbmesh-$node"
 
 touch /etc/config/meshtodon
 echo "config meshtodon 'main'" > /etc/config/meshtodon
@@ -67,7 +67,7 @@ uci set network.lan.netmask='255.255.255.0'
 
 #nodog settings
 uci set nodogsplash.@instance[0].enabled='1'
-uci set nodogsplash.@instance[0].gatewayname='Meshtodon'
+uci set nodogsplash.@instance[0].gatewayname='SB Mesh'
 uci del_list nodogsplash.@instance[0].authenticated_users='block to 10.0.0.0/8'
 uci add_list nodogsplash.@instance[0].authenticated_users='block to 172.16.0.0/12'
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all to 10.0.0.0/8'
@@ -117,7 +117,7 @@ uci set libremap.settings.community='Santa Barbara Mesh'
 uci set libremap.location.latitude='34.419275'
 uci set libremap.location.longitude='-119.699334'
 uci commit
-/etc/init.d/libremap-agent enable
+/etc/init.d/libremap-agent disable
 
 #configure tinc
 #/etc/meshtodon/tinc_conf.sh
