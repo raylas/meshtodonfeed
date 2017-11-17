@@ -18,7 +18,7 @@ Requirements
   * Configured for 2 CPUs (potentially optional)
 
 
-##Vagrantfile (if you're using Vagrant)
+Vagrantfile (if you're using Vagrant):
 
 ```
 Vagrant.configure(“2”) do |config|
@@ -94,4 +94,4 @@ Firmware images (**factory** and **sysupgrade**) will be in `images/`
 Firmware flashing
 -----------------
 
-Once compiled follow our NanoStation M5 flashing instructions (on our website)[https://sbmesh.net/join.html].
+Once compiled follow our NanoStation M5 flashing instructions [on our website](https://sbmesh.net/join.html).
