@@ -65,6 +65,8 @@ echo "src-git meshtodonfeed https://github.com/raylas/meshtodonfeed.git" >> ./bu
 Update netperf-2.7.0 Makefile
 -----------------------------
 
+*This in an issue with OpenWrt's package source for netperf not resolving*
+
 Open the netperf Makefile:
 
 `nano build/openwrt/package/feeds/packages/netperf/Makefile`
